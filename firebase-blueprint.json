@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "announcement": {
+      "title": "Announcement",
+      "description": "Digital signage slides/announcements",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Title of the slide" },
+        "content": { "type": "string", "description": "Text content" },
+        "imageUrl": { "type": "string", "format": "uri", "description": "Optional image URL" },
+        "videoUrl": { "type": "string", "format": "uri", "description": "Optional video URL" },
+        "type": { "type": "string", "enum": ["image", "video", "text"] },
+        "duration": { "type": "number", "description": "Display duration in seconds" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["title", "type", "duration", "active", "createdAt"]
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Masjid specific settings",
+      "type": "object",
+      "properties": {
+        "masjidName": { "type": "string" },
+        "zone": { "type": "string" },
+        "sidebarText": { "type": "string" },
+        "sidebarImageUrl": { "type": "string" },
+        "facebookLiveUrl": { "type": "string" }
+      },
+      "required": ["masjidName", "zone"]
+    }
+  },
+  "firestore": {
+    "/announcements/{announcementId}": {
+      "schema": "announcement",
+      "description": "Collection of signage slides"
+    },
+    "/settings/global": {
+      "schema": "settings",
+      "description": "Global application settings"
+    }
+  }
+}
